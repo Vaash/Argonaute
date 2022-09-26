@@ -13,8 +13,11 @@ class ArgonauteController extends AbstractController
      */
     public function index(): Response
     {
+
+
+
         return $this->render('argonaute/index.html.twig', [
-            'controller_name' => 'ArgonauteController',
+            'captain' => '',
         ]);
     }
 }
