@@ -14,11 +14,11 @@
                 Les Argonautes
             </h1>
         </header>
+        {% for flashError in app.flashes('success') %}{% endfor %}
 
         <h2>Ajouter un(e) Argonaute</h2>
 
         {{ form(argonauteHiringForm) }}
-
         <h2>Membres de l'équipage</h2>
         <div class="argonaute-container">
             {% for argonaute in argonauteList %}

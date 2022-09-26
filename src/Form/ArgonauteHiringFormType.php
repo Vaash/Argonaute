@@ -20,6 +20,9 @@ class ArgonauteHiringFormType extends AbstractType
                 'label' => "Nom de l'argonaute",
                 'constraints' => [
                     new Length(['min' => 3])
+                ],
+                'attr' => [
+                    'placeholder' => 'Charalampos'
                 ]
             ])
             ->add('Envoyer', SubmitType::class, [
