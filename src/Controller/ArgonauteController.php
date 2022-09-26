@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ArgonauteController extends AbstractController
 {
     /**
-     * @Route("/argonaute", name="app_argonaute")
+     * @Route("/", name="app_argonaute")
      */
     public function index(): Response
     {
