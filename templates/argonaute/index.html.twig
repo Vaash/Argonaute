@@ -1,15 +1,30 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les Argonautes{% endblock %}
+{% block title %}
+            Les Argonautes
+{% endblock %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ captain }}! </h1>
+    <div class="example-wrapper">
+        <header>
+            <h1>
+                <img src="https://www.wildcodeschool.com/assets/logo_main-e4f3f744c8e717f1b7df3858dce55a86c63d4766d5d9a7f454250145f097c2fe.png"
+                     alt="Wild Code School logo"/>
+                Les Argonautes
+            </h1>
+        </header>
 
-    <h2>Hire argonaute</h2>
+        <h2>Ajouter un(e) Argonaute</h2>
 
-    {{ form(argonauteHiringForm) }}
+        {{ form(argonauteHiringForm) }}
 
-</div>
+        <h2>Membres de l'équipage</h2>
+        <div class="argonaute-container">
+            {% for argonaute in argonauteList %}
+                <div class="argonaute-item">{{ argonaute.name }}</div>
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}

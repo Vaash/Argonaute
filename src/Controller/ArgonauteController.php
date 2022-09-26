@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\ArgonauteRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Argonaute;
 use App\Form\ArgonauteHiringFormType;
 use phpDocumentor\Reflection\Types\Resource_;
@@ -16,23 +18,28 @@ class ArgonauteController extends AbstractController
     /**
      * @Route("/", name="app_argonaute")
      */
-    public function index(): Response
+    public function index(Request $request,ManagerRegistry $doctrine,ArgonauteRepository $argonauteRepository): Response
     {
-        return $this->render('argonaute/index.html.twig', [
-            'captain' => 'Captain',
-        ]);
-    }
-
-    public function hire(Request $request): Response
-    {
+//        dump($argonauteRepository->findAll());
+//        die();
+        $entityManager = $doctrine->getManager();
         $argonaute = new Argonaute();
-        $argonaute->setName('name');
 
         $form = $this->createForm(ArgonauteHiringFormType::class, $argonaute);
-        var_dump();
-        die();
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $argonaute = $form->getData();
+//            dd($argonaute, $argonauteRepository);
+            $entityManager->persist($argonaute);
+            $entityManager->flush();
+        }
+
+        $argonautes = $argonauteRepository->findAll();
+
         return $this->renderForm('argonaute/index.html.twig', [
+            'captain' => 'Captain',
             'argonauteHiringForm' => $form,
+            'argonauteList' => $argonautes,
         ]);
     }
 }
